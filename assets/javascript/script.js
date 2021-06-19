@@ -10,6 +10,7 @@ var button4 = document.getElementById("button-D");
 var questionText = document.getElementById("question-text");
 var quizForm = document.getElementById("quiz");
 var restartForm = document.getElementById("final-score")
+var answerValidationEl = document.getElementById("asnwer-validation");
 // Question array
 var quizQuestions = [{
         question: "Functions are used to _______",
@@ -57,6 +58,8 @@ var quizQuestions = [{
 var finalQuestion = quizQuestions.length;
 var index = 0;
 var score = 0;
+var timeRemaining = 60;
+var timer;
 
 function generateQuestions() {
     if (index === finalQuestion); {
@@ -97,7 +100,7 @@ var answerCheck = function(answer) {
     var rightAnswer = quizQuestions[index].correctAnswer
     if (rightAnswer === answer){
         index++;
-        alert("Correct!")
+        // answerValidationEl.textContent = "Correct!"
         generateQuestions();
     }
     else {
@@ -106,7 +109,7 @@ var answerCheck = function(answer) {
         generateQuestions();
     }
 }
-function restart(){
+function gameEnd(){
     restartForm.style.display = "flex";
     quizForm.style.display = "none";
 }
