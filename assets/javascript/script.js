@@ -11,6 +11,7 @@ var questionText = document.getElementById("question-text");
 var quizForm = document.getElementById("quiz");
 var restartForm = document.getElementById("final-score")
 var answerValidationEl = document.getElementById("asnwer-validation");
+var scoreDisplay = document.getElementById("points-display");
 // Question array
 var quizQuestions = [{
         question: "Functions are used to _______",
@@ -58,13 +59,13 @@ var quizQuestions = [{
 var finalQuestion = quizQuestions.length;
 var index = 0;
 var score = 0;
-var timeRemaining = 60;
+var timeRemaining = 50;
 var timer;
 
 function generateQuestions() {
-    if (index === finalQuestion); {
+    if (index === finalQuestion) {
         console.log("broken");
-        // restart();
+        gameEnd();
     }
     // console.log(finalQuestion);
     // console.log(index);
@@ -81,8 +82,6 @@ var startQuiz = function() {
     startQuizPage.style.display = "none";
     
     generateQuestions();
-
-    var timeRemaining = 60;
     var timer = setInterval(function(){
         if (timeRemaining > 0) {
             countdownEl.textContent = "Time Remaining: " + timeRemaining;
@@ -100,18 +99,31 @@ var answerCheck = function(answer) {
     var rightAnswer = quizQuestions[index].correctAnswer
     if (rightAnswer === answer){
         index++;
+        alert("Correct!")
         // answerValidationEl.textContent = "Correct!"
         generateQuestions();
     }
     else {
         index++
         alert("Incorrect!")
+        timeRemaining = timeRemaining - 7;
         generateQuestions();
+        
     }
 }
 function gameEnd(){
     restartForm.style.display = "flex";
     quizForm.style.display = "none";
+    score = timeRemaining;
+    scoreDisplay.textContent = "Your final score it " + score;
+    timeRemaining = 0;
+    
+}
+var restart = function(){
+    restartForm.style.display = "none";
+    startQuizPage.style.display = "block";
+    index = 0;
+    timeRemaining = 50;
 }
     
 
