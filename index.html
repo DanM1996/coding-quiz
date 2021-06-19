@@ -10,7 +10,7 @@
 <body>
     <header id='score-container' class="container">
         <p id="highscore">Highscores</p>
-        <p id="countdown">Time remaining:</p>
+        <p id="countdown"></p>
     </header>
     <div id="quiz-start" class="quiz-start">
         <p id="start-text">Welcome to the Coding Quiz! You'll have 1 minute to answer as many questions as possible. For reach wrong answer you will lost 7 seconds on your time. Your total time remaining at the end of the quiz will be your high score. Good luck!</p>
@@ -23,7 +23,10 @@
         <button id="button-C" onclick="answerCheck('c')">Button C</button>
         <button id="button-D" onclick="answerCheck('d')">Button D</button>
     </div>
-    
+    <div id="final-score" class="final-score">
+        <p>test</p>
+        <button id="btn-restart" class="btn-restart">Take the Quiz Again</button> 
+    </div>
     
     <script src="assets/javascript/script.js"></script>
 </body>

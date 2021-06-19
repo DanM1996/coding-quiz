@@ -1,14 +1,15 @@
 // DOM variables
 
 var startButton = document.getElementById("btn-start");
-var timer = document.getElementById("countdown");
+var countdownEl = document.getElementById("countdown");
 var startQuizPage = document.getElementById("quiz-start");
 var button1 = document.getElementById("button-A");
 var button2 = document.getElementById("button-B");
 var button3 = document.getElementById("button-C");
 var button4 = document.getElementById("button-D");
 var questionText = document.getElementById("question-text");
-
+var quizForm = document.getElementById("quiz");
+var restartForm = document.getElementById("final-score")
 // Question array
 var quizQuestions = [{
         question: "Functions are used to _______",
@@ -57,8 +58,13 @@ var finalQuestion = quizQuestions.length;
 var index = 0;
 var score = 0;
 
-var generateQuestions = function() {
-    // if (currentQuestion === finalQuestion);
+function generateQuestions() {
+    if (index === finalQuestion); {
+        console.log("broken");
+        // restart();
+    }
+    // console.log(finalQuestion);
+    // console.log(index);
     // alert("Game Over!");
     var activeQuestion = quizQuestions[index];
     questionText.innerHTML = "<p>" + activeQuestion.question + "<p>";
@@ -69,8 +75,22 @@ var generateQuestions = function() {
     // currentQuestion++;
 };
 var startQuiz = function() {
-    // startQuizPage.style.display = "none";
+    startQuizPage.style.display = "none";
+    
     generateQuestions();
+
+    var timeRemaining = 60;
+    var timer = setInterval(function(){
+        if (timeRemaining > 0) {
+            countdownEl.textContent = "Time Remaining: " + timeRemaining;
+            timeRemaining--;
+        }
+        else {
+            countdownEl.textContent = "";
+            clearInterval(timer);
+        }
+    }, 1000);
+    quizForm.style.display = "block";
 }
 
 var answerCheck = function(answer) {
@@ -79,7 +99,6 @@ var answerCheck = function(answer) {
         index++;
         alert("Correct!")
         generateQuestions();
-        score++;
     }
     else {
         index++
@@ -87,5 +106,10 @@ var answerCheck = function(answer) {
         generateQuestions();
     }
 }
+function restart(){
+    restartForm.style.display = "flex";
+    quizForm.style.display = "none";
+}
+    
 
 startButton.addEventListener("click", startQuiz); 

@@ -17,10 +17,28 @@
     padding: 20px;
     background-color: rgb(56, 201, 116);
 }
+.quiz {
+    margin-left: auto;
+    font-size: 30px;
+    flex-direction: column;
+    display: none;
+}
+button {
+    display: flex;
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+}
 .btn-start {
-    position: absolute;
     transform: translateX(330%);
     background-color: rgb(129, 230, 216);
     font-size: 15px;
     padding: 20px 30px;
+}
+.final-score {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 22px;
+    padding: 20px;
+    display: none;
 }
