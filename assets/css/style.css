@@ -1,0 +1,26 @@
+:root {
+    background-color: rgb(128, 216, 216);
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 22px;
+    padding: 20px;
+}
+.quiz-start p {
+    font-size: 20px;
+    margin: 20px 50px;
+    text-align: center;
+    padding-bottom: 20px;
+    border: solid 3px green;
+    padding: 20px;
+    background-color: rgb(56, 201, 116);
+}
+.btn-start {
+    position: absolute;
+    transform: translateX(330%);
+    background-color: rgb(129, 230, 216);
+    font-size: 15px;
+    padding: 20px 30px;
+}
