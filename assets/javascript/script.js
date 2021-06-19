@@ -16,7 +16,7 @@ var quizQuestions = [{
         answerB: "Display an alert message",
         answerC: "Perform an action",
         answerD: "Style elements",
-        correctAnswer1: "c"
+        correctAnswer: "c"
     },
     {
         question: "CSS stands for:",
@@ -24,7 +24,7 @@ var quizQuestions = [{
         answerB: "Cascading Style Sheets",
         answerC: "Competitive Style Sheets",
         answerD: "Cascading Short Styles",
-        correctAnswer2: "b"
+        correctAnswer: "b"
     },
     {
         question: "Which of the following is NOT a falsey value?",
@@ -32,7 +32,7 @@ var quizQuestions = [{
         answerB: "null",
         answerC: "0",
         answerD: "'false'",
-        correctAnswer3: "d"
+        correctAnswer: "d"
     },
     {
         question: "The text run between the parenthesis () of a function is called a ___",
@@ -40,7 +40,7 @@ var quizQuestions = [{
         answerB: "Object",
         answerC: "Variable",
         answerD: "Parameter",
-        correctAnswer4: "d"
+        correctAnswer: "d"
     },
     {
         question: "The platform commonly used to host repositories and websites is",
@@ -48,28 +48,44 @@ var quizQuestions = [{
         answerB: "Stack Overflow",
         answerC: "Bing",
         answerD: "Wordpress",
-        correctAnswer5: "a"
+        correctAnswer: "a"
     }
 ];
 
 // variables after object array so they can take the value of the object
 var finalQuestion = quizQuestions.length;
-var currentQuestion = 0;
-
+var index = 0;
+var score = 0;
 
 var generateQuestions = function() {
     // if (currentQuestion === finalQuestion);
     // alert("Game Over!");
-    var activeQuestion = quizQuestions[currentQuestion];
+    var activeQuestion = quizQuestions[index];
     questionText.innerHTML = "<p>" + activeQuestion.question + "<p>";
     button1.innerHTML = activeQuestion.answerA;
     button2.innerHTML = activeQuestion.answerB;
     button3.innerHTML = activeQuestion.answerC;
     button4.innerHTML = activeQuestion.answerD;
+    // currentQuestion++;
 };
 var startQuiz = function() {
     // startQuizPage.style.display = "none";
     generateQuestions();
+}
+
+var answerCheck = function(answer) {
+    var rightAnswer = quizQuestions[index].correctAnswer
+    if (rightAnswer === answer){
+        index++;
+        alert("Correct!")
+        generateQuestions();
+        score++;
+    }
+    else {
+        index++
+        alert("Incorrect!")
+        generateQuestions();
+    }
 }
 
 startButton.addEventListener("click", startQuiz); 
