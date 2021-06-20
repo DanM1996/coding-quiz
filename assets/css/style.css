@@ -53,5 +53,10 @@ button {
     margin-left: 200px;
     font-size: 30px;
     flex-direction: column;
+    align-items: center;
     display: none;
+}
+.scoreboard-list ul {
+    text-align: center;
+    list-style-type: none;
 }

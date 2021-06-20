@@ -9,7 +9,6 @@
 </head>
 <body>
     <header id='score-container' class="container">
-        <p id="highscore-list">Highscores</p>
         <p id="countdown"></p>
     </header>
     <div id="quiz-start" class="quiz-start">
@@ -24,7 +23,7 @@
         <button id="button-D" onclick="answerCheck('d')">Button D</button>
         <P id="answer-validation" class="answer-validation"></P>
     </div>
-    <form id="final-score" class="final-score">
+    <div id="final-score" class="final-score">
         <div id="points-display">test</div>
         <div id="highscore">
             <input type="text"
@@ -34,9 +33,10 @@
                 <button id="score-submit" class="score-submit">Add Score</button>
         </div>
         <div id="message"></div>
-    </form>
+    </div>
     <div id="scoreboard-list" class="scoreboard-list">
-        <!-- <button id="btn-restart" class="btn-restart" onclick="restart()">Take the Quiz Again</button>  -->
+        <ul id="score-list" class="score-list"></ul>
+        <button id="btn-restart" class="btn-restart" onclick="restart()">Take the Quiz Again</button> 
     </div>
     <script src="assets/javascript/script.js"></script>
 </body>

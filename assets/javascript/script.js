@@ -12,10 +12,12 @@ var quizForm = document.getElementById("quiz");
 var restartForm = document.getElementById("final-score")
 var answerValidationEl = document.getElementById("asnwer-validation");
 var scoreDisplay = document.getElementById("points-display");
-var initalInput = document.getElementById("add-initial");
+var initialInput = document.getElementById("add-initial");
 var verifyInitials = document.getElementById("message");
 var addScore = document.getElementById("score-submit");
 var highscoreList = document.getElementById("scoreboard-list");
+var highscoreListContainer = document.querySelector(".scoreboard-list");
+var scoreList = document.getElementById("score-list");
 
 // Question array
 var quizQuestions = [{
@@ -69,19 +71,16 @@ var timer;
 
 function generateQuestions() {
     if (index === finalQuestion) {
-        console.log("broken");
         gameEnd();
-    }
-    // console.log(finalQuestion);
-    // console.log(index);
-    // alert("Game Over!");
+    } else {
+    
     var activeQuestion = quizQuestions[index];
     questionText.innerHTML = "<p>" + activeQuestion.question + "<p>";
     button1.innerHTML = activeQuestion.answerA;
     button2.innerHTML = activeQuestion.answerB;
     button3.innerHTML = activeQuestion.answerC;
     button4.innerHTML = activeQuestion.answerD;
-    // currentQuestion++;
+    }
 };
 var startQuiz = function() {
     startQuizPage.style.display = "none";
@@ -105,7 +104,6 @@ var answerCheck = function(answer) {
     if (rightAnswer === answer){
         index++;
         alert("Correct!")
-        // answerValidationEl.textContent = "Correct!"
         generateQuestions();
     }
     else {
@@ -123,23 +121,23 @@ function displayMessage(type, message) {
 function gameEnd(){
     restartForm.style.display = "flex";
     quizForm.style.display = "none";
-    highscoreList.style.display = "none";
+    highscoreListContainer.style.display = "none";
     score = timeRemaining;
     scoreDisplay.textContent = "Your final score is " + score;
     timeRemaining = 0;  
 }
 
 addScore.addEventListener('click', function highscore() {
-    
+    //Stops this button from refreshing the page
+    event.preventDefault();
 
-    if (highscoreSubmit.value === "") {
+    if (initialInput.value === "") {
         alert("Enter your intials to register a highscore")
         
     }
     else {
-        alert("this works")
         var savedScores = JSON.parse(localStorage.getItem("savedScores")) || [];
-        var user = initalInput.value.trim();
+        var user = initialInput.value.trim();
         var currentScore = {
             name: user,
             score: score,
@@ -147,7 +145,7 @@ addScore.addEventListener('click', function highscore() {
 
         restartForm.style.dispaly = "none";
         quizForm.style.display = "none";
-        highscoreList.style.display = "flex";
+        highscoreListContainer.style.display = "flex";
 
 
         savedScores.push(currentScore);
@@ -157,22 +155,26 @@ addScore.addEventListener('click', function highscore() {
 }); 
 
 function renderScoreBoard() {
-    initalInput.innerHTML = "";
-    addScore.innerHTML = "";
+    initialInput.innerHTML = "";
+    scoreList.innerHTML = "";
     var highscoreList = JSON.parse(localStorage.getItem("savedScores")) || [];
+    console.log(highscoreList);
     for (i=0; i<highscoreList.length; i++) {
-        var newNameSpan = document.createElement("li");
-        var newScoreSpan = document.createElement("li");
-        newNameSpan.textContent = highscoreList[i].name;
-        newScoreSpan.textContent = highscoreList[i].score;
-        initalInput.appendChild(newNameSpan);
-        addScore.appendChild(newScoreSpan);
+        var nameItem = document.createElement("li");
+        var scoreItem = document.createElement("li");
+        nameItem.textContent = highscoreList[i].name;
+        scoreItem.textContent = highscoreList[i].score;
+        initialInput.appendChild(nameItem);
+        scoreList.appendChild(scoreItem);
     }
+    restartForm.style.display = "none";
+    startQuizPage.style.display = "none";
+    highscoreListContainer.style.display = "block";
 }
 var restart = function(){
     restartForm.style.display = "none";
     startQuizPage.style.display = "block";
-    highscoreList.style.display = "none";
+    highscoreListContainer.style.display = "none";
     index = 0;
     timeRemaining = 50;
 }
