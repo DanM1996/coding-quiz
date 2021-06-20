@@ -158,13 +158,10 @@ function renderScoreBoard() {
     initialInput.innerHTML = "";
     scoreList.innerHTML = "";
     var highscoreList = JSON.parse(localStorage.getItem("savedScores")) || [];
-    console.log(highscoreList);
+
     for (i=0; i<highscoreList.length; i++) {
-        var nameItem = document.createElement("li");
         var scoreItem = document.createElement("li");
-        nameItem.textContent = highscoreList[i].name;
-        scoreItem.textContent = highscoreList[i].score;
-        initialInput.appendChild(nameItem);
+        scoreItem.textContent =  highscoreList[i].name + ":  " + highscoreList[i].score;
         scoreList.appendChild(scoreItem);
     }
     restartForm.style.display = "none";
@@ -178,5 +175,8 @@ var restart = function(){
     index = 0;
     timeRemaining = 50;
 }
-    
+ function clearBoard() {
+    localStorage.clear();
+    scoreList.textContent = "";
+ }   
 startButton.addEventListener("click", startQuiz); 
