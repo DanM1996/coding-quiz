@@ -12,6 +12,11 @@ var quizForm = document.getElementById("quiz");
 var restartForm = document.getElementById("final-score")
 var answerValidationEl = document.getElementById("asnwer-validation");
 var scoreDisplay = document.getElementById("points-display");
+var initalInput = document.getElementById("add-initial");
+var verifyInitials = document.getElementById("message");
+var addScore = document.getElementById("score-submit");
+var highscoreList = document.getElementById("scoreboard-list");
+
 // Question array
 var quizQuestions = [{
         question: "Functions are used to _______",
@@ -38,7 +43,7 @@ var quizQuestions = [{
         correctAnswer: "d"
     },
     {
-        question: "The text run between the parenthesis () of a function is called a ___",
+        question: "The text run between the parenthesis () of a function is called a _________",
         answerA: "Method",
         answerB: "Object",
         answerC: "Variable",
@@ -111,20 +116,65 @@ var answerCheck = function(answer) {
         
     }
 }
+function displayMessage(type, message) {
+    verifyInitials.textContent = message;
+    verifyInitials.setAttribute('class', type);
+}
 function gameEnd(){
     restartForm.style.display = "flex";
     quizForm.style.display = "none";
+    highscoreList.style.display = "none";
     score = timeRemaining;
-    scoreDisplay.textContent = "Your final score it " + score;
-    timeRemaining = 0;
+    scoreDisplay.textContent = "Your final score is " + score;
+    timeRemaining = 0;  
+}
+
+addScore.addEventListener('click', function highscore() {
     
+
+    if (highscoreSubmit.value === "") {
+        alert("Enter your intials to register a highscore")
+        
+    }
+    else {
+        alert("this works")
+        var savedScores = JSON.parse(localStorage.getItem("savedScores")) || [];
+        var user = initalInput.value.trim();
+        var currentScore = {
+            name: user,
+            score: score,
+        };
+
+        restartForm.style.dispaly = "none";
+        quizForm.style.display = "none";
+        highscoreList.style.display = "flex";
+
+
+        savedScores.push(currentScore);
+        localStorage.setItem("savedScores", JSON.stringify(savedScores));
+        renderScoreBoard();
+    }
+}); 
+
+function renderScoreBoard() {
+    initalInput.innerHTML = "";
+    addScore.innerHTML = "";
+    var highscoreList = JSON.parse(localStorage.getItem("savedScores")) || [];
+    for (i=0; i<highscoreList.length; i++) {
+        var newNameSpan = document.createElement("li");
+        var newScoreSpan = document.createElement("li");
+        newNameSpan.textContent = highscoreList[i].name;
+        newScoreSpan.textContent = highscoreList[i].score;
+        initalInput.appendChild(newNameSpan);
+        addScore.appendChild(newScoreSpan);
+    }
 }
 var restart = function(){
     restartForm.style.display = "none";
     startQuizPage.style.display = "block";
+    highscoreList.style.display = "none";
     index = 0;
     timeRemaining = 50;
 }
     
-
 startButton.addEventListener("click", startQuiz); 

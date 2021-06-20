@@ -9,7 +9,7 @@
 </head>
 <body>
     <header id='score-container' class="container">
-        <p id="highscore">Highscores</p>
+        <p id="highscore-list">Highscores</p>
         <p id="countdown"></p>
     </header>
     <div id="quiz-start" class="quiz-start">
@@ -24,11 +24,20 @@
         <button id="button-D" onclick="answerCheck('d')">Button D</button>
         <P id="answer-validation" class="answer-validation"></P>
     </div>
-    <div id="final-score" class="final-score">
-        <p id="points-display">test</p>
-        <button id="btn-restart" class="btn-restart" onclick="restart()">Take the Quiz Again</button> 
+    <form id="final-score" class="final-score">
+        <div id="points-display">test</div>
+        <div id="highscore">
+            <input type="text"
+                name="add-initial"
+                id="add-initial" 
+                placeholder="Enter initials here" />
+                <button id="score-submit" class="score-submit">Add Score</button>
+        </div>
+        <div id="message"></div>
+    </form>
+    <div id="scoreboard-list" class="scoreboard-list">
+        <!-- <button id="btn-restart" class="btn-restart" onclick="restart()">Take the Quiz Again</button>  -->
     </div>
-    
     <script src="assets/javascript/script.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 :root {
     background-color: rgb(128, 216, 216);
 }
-#highscore, #countdown {
+#highscore-list, #countdown {
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 30px;
@@ -47,5 +47,11 @@ button {
     justify-content: space-between;
     font-size: 22px;
     padding: 20px;
+    display: none;
+}
+.scoreboard-list {
+    margin-left: 200px;
+    font-size: 30px;
+    flex-direction: column;
     display: none;
 }
